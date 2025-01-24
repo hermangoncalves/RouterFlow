@@ -1,0 +1,11 @@
+servers:
+    - name: spnet
+      host: 192.168.8.1
+      port: "8728"
+      username: OLan
+      password: syspasswd
+    - name: 'ampere '
+      host: 192.168.13.1
+      port: "8728"
+      username: OLan
+      password: syspasswd
