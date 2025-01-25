@@ -7,8 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/charmbracelet/lipgloss"
-	"github.com/hermangoncalves/routerflow/pkg/config"
+	"github.com/hermangoncalves/routerflow/config"
 	"github.com/hermangoncalves/routerflow/pkg/utils"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -27,10 +26,6 @@ const logo = `
 `
 
 var (
-	logoStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#01FAC6")).Bold(true)
-)
-
-var (
 	cfgFile string
 )
 
@@ -40,11 +35,11 @@ var rootCmd = &cobra.Command{
 	Use:   "routerflow",
 	Short: "A CLI tool to manage MikroTik routers",
 	Long:  `RouterFlow CLI Tool: Automate RouterOS configurations and monitor your network`,
-	Run:   func(cmd *cobra.Command, args []string) {},
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("RouterFlow CLI. Use --help to see available commands.")
+	},
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
@@ -83,7 +78,7 @@ func initConfig() {
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			fmt.Println("Configuration file not found.")
-			fmt.Println("Please run `config` command to set up the application.")
+			// fmt.Println("Please run `config` command to set up the application.")
 		} else {
 			fmt.Printf("Error loading configuration: %v\n", err)
 			os.Exit(1)
